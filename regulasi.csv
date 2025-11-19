@@ -1,21 +1,26 @@
-sector,domain,level,regulasi,presence,detail,sanction
-Minol,Distribusi,Permen,Permendag 20/2014,1,1,1
-Minol,Distribusi,Permen,Permenperin 17/2019,1,1,1
-Tembakau,Distribusi,Permen,-,0,0,0
-Minol,Standar mutu,Peraturan Lembaga,BPOM 5/2021,1,1,1
-Tembakau,Standar mutu,Peraturan Lembaga,-,0,0,0
-Minol,Daring,Peraturan Lembaga,BPOM 8/2020,1,1,1
-Tembakau,Daring,Peraturan Lembaga,-,0,0,0
-Tembakau,Label,PP/Perpres,PP 109/2012,1,1,1
-Tembakau,Label,Permen,Permenkes 28/2013 (+ 56/2017),1,1,1
-Minol,Label,PP/Perpres,Perpres 74/2013,1,0,1
-Minol,Label,Peraturan Lembaga,BPOM 27/2017,1,1,1
-Minol,Iklan,UU,UU 32/2002 Penyiaran,1,1,1
-Tembakau,Iklan,UU,UU 32/2002 Penyiaran,1,0,1
-Tembakau,Iklan,Peraturan Lembaga,KPI P3/SPS 2012,1,1,1
-Tembakau,Iklan,Peraturan Lembaga,BPOM 41/2013,1,1,1
-Minol,Izin produksi,PP/Perpres,Perpres 74/2013,1,1,1
-Minol,Izin produksi,UU,UU 25/2007 Penanaman Modal,1,1,1
-Minol,Izin produksi,PP/Perpres,Perpres 39/2014 Daftar Bidang Usaha,1,1,1
-Tembakau,Izin produksi,Peraturan Lembaga,PMK 66/2018 NPBKC,1,1,1
-Tembakau,Izin produksi,PP/Perpres,Perpres 91/2017 Percepatan Berusaha,1,0,1
+sector,domain,level,regulasi,presence,detail,sanction,year
+Minol,Distribusi,UU,UU 8 Prp Tahun 1962,1,1,1,1962
+Minol,Izin produksi,UU,UU 25/2007 Penanaman Modal,1,1,1,2007
+Minol,Izin produksi,PP/Perpres,Perpres 39/2014 Daftar Bidang Usaha,1,1,1,2014
+Minol,Izin produksi,PP/Perpres,Perpres 74/2013,1,1,1,2013
+Minol,Distribusi,Permen,Permendag 20/2014,1,1,1,2014
+Minol,Distribusi,Permen,Permenperin 17/2019,1,1,1,2019
+Minol,Distribusi,Permen,Permenkes 86/1977,1,1,1,1977
+Minol,Standar mutu,Peraturan Lembaga,BPOM 5/2021,1,1,1,2021
+Minol,Daring,Peraturan Lembaga,BPOM 8/2020,1,1,1,2020
+Minol,Label,PP/Perpres,Perpres 74/2013,1,0,1,2013
+Minol,Label,Peraturan Lembaga,BPOM 27/2017,1,1,1,2017
+Minol,Iklan,UU,UU 32/2002 Penyiaran,1,1,1,2002
+
+Tembakau,Izin produksi,UU,UU 11/1995 Cukai,1,1,1,1995
+Tembakau,Izin produksi,PP/Perpres,Perpres 91/2017 Percepatan Berusaha,1,0,1,2017
+Tembakau,Izin produksi,Peraturan Lembaga,PMK 66/2018 NPBKC,1,1,1,2018
+Tembakau,Label,UU,UU 36/2009 Kesehatan,1,1,1,2009
+Tembakau,Label,PP/Perpres,PP 109/2012,1,1,1,2012
+Tembakau,Label,Permen,Permenkes 28/2013 (+ 56/2017),1,1,1,2013
+Tembakau,Iklan,UU,UU 32/2002 Penyiaran,1,0,1,2002
+Tembakau,Iklan,Peraturan Lembaga,KPI P3/SPS 2012,1,1,1,2012
+Tembakau,Iklan,Peraturan Lembaga,BPOM 41/2013,1,1,1,2013
+Tembakau,Distribusi,Permen,-,0,0,0,
+Tembakau,Standar mutu,Peraturan Lembaga,-,0,0,0,
+Tembakau,Daring,Peraturan Lembaga,-,0,0,0,
