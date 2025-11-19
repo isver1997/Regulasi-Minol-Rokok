@@ -2,29 +2,35 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
-import numpy as np
 import re
 
+# --- Konfigurasi halaman ---
 st.set_page_config(page_title="Analisis Regulasi Minol vs Tembakau", layout="wide")
 st.title("Analisis Regulasi Minol vs Tembakau")
 
-# Load
+# --- Step 1: Baca CSV ---
 df = pd.read_csv("regulasi.csv")
 
-# --- Preprocessing (WAJIB) ---
+# --- Step 2: Preprocessing ---
+# Bobot hierarki level
 level_weights = {"UUD":5,"UU":4,"PP/Perpres":3,"Permen":2,"Peraturan Lembaga":1}
+
+# Pastikan tipe data benar
 df["presence"] = df["presence"].astype(int)
 df["detail"] = df["detail"].astype(int)
-df["sanction"] = df["presence"].astype(int)
+df["sanction"] = df["presence"]   # aturanmu: presence = sanction
 df["level_score"] = df["level"].map(level_weights).fillna(0).astype(int)
+
+# Skor intensitas
 df["intensity_score"] = df["level_score"] + df["detail"] + df["sanction"]
 
+# Ekstraksi tahun (regex diperbaiki agar tidak hanya menangkap "20")
 def extract_year(s):
-    m = re.findall(r"(19|20)\d{2}", str(s))
-    return int(m[0]) if m else np.nan
+    m = re.findall(r"\b(19\d{2}|20\d{2})\b", str(s))
+    return int(m[0]) if m else None
 df["year"] = df["regulasi"].apply(extract_year)
 
-# --- Filter Sidebar ---
+# --- Step 3: Filter Sidebar ---
 sector_sel = st.sidebar.multiselect("Pilih sektor", sorted(df["sector"].unique()), default=sorted(df["sector"].unique()))
 domain_sel = st.sidebar.multiselect("Pilih domain", sorted(df["domain"].unique()), default=sorted(df["domain"].unique()))
 df_f = df[(df["sector"].isin(sector_sel)) & (df["domain"].isin(domain_sel))].copy()
@@ -32,7 +38,7 @@ df_f = df[(df["sector"].isin(sector_sel)) & (df["domain"].isin(domain_sel))].cop
 st.subheader("Tabel Data")
 st.dataframe(df_f, use_container_width=True)
 
-# --- Ringkasan Intensitas ---
+# --- Step 4: Ringkasan Intensitas ---
 summary = df_f.groupby(["domain","sector"])["intensity_score"].mean().reset_index()
 
 col1, col2 = st.columns(2)
@@ -41,7 +47,7 @@ with col1:
     st.subheader("Bar Chart Intensitas")
     fig, ax = plt.subplots(figsize=(7,4))
     sns.barplot(data=summary, x="domain", y="intensity_score", hue="sector", ax=ax, palette="viridis")
-    ax.set_xlabel("Domain"); ax.set_ylabel("Rata-rata Intensitas"); ax.set_title("")
+    ax.set_xlabel("Domain"); ax.set_ylabel("Rata-rata Intensitas")
     plt.xticks(rotation=20)
     st.pyplot(fig)
 
@@ -53,7 +59,7 @@ with col2:
     ax2.set_xlabel(""); ax2.set_ylabel("Domain")
     st.pyplot(fig2)
 
-# --- Gap Regulasi Eksklusif Minol ---
+# --- Step 5: Gap Analysis ---
 presence_by_sector_domain = df_f.groupby(["sector","domain"])["presence"].sum().reset_index()
 pivot_presence = presence_by_sector_domain.pivot(index="domain", columns="sector", values="presence").fillna(0)
 exclusive_domains = pivot_presence.index[(pivot_presence.get("Minol",0)>0) & (pivot_presence.get("Tembakau",0)==0)].tolist()
