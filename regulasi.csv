@@ -1,0 +1,21 @@
+sector,domain,level,regulasi,presence,detail,sanction
+Minol,Distribusi,Permen,Permendag 20/2014,1,1,1
+Minol,Distribusi,Permen,Permenperin 17/2019,1,1,1
+Tembakau,Distribusi,Permen,-,0,0,0
+Minol,Standar mutu,Peraturan Lembaga,BPOM 5/2021,1,1,1
+Tembakau,Standar mutu,Peraturan Lembaga,-,0,0,0
+Minol,Daring,Peraturan Lembaga,BPOM 8/2020,1,1,1
+Tembakau,Daring,Peraturan Lembaga,-,0,0,0
+Tembakau,Label,PP/Perpres,PP 109/2012,1,1,1
+Tembakau,Label,Permen,Permenkes 28/2013 (+ 56/2017),1,1,1
+Minol,Label,PP/Perpres,Perpres 74/2013,1,0,1
+Minol,Label,Peraturan Lembaga,BPOM 27/2017,1,1,1
+Minol,Iklan,UU,UU 32/2002 Penyiaran,1,1,1
+Tembakau,Iklan,UU,UU 32/2002 Penyiaran,1,0,1
+Tembakau,Iklan,Peraturan Lembaga,KPI P3/SPS 2012,1,1,1
+Tembakau,Iklan,Peraturan Lembaga,BPOM 41/2013,1,1,1
+Minol,Izin produksi,PP/Perpres,Perpres 74/2013,1,1,1
+Minol,Izin produksi,UU,UU 25/2007 Penanaman Modal,1,1,1
+Minol,Izin produksi,PP/Perpres,Perpres 39/2014 Daftar Bidang Usaha,1,1,1
+Tembakau,Izin produksi,Peraturan Lembaga,PMK 66/2018 NPBKC,1,1,1
+Tembakau,Izin produksi,PP/Perpres,Perpres 91/2017 Percepatan Berusaha,1,0,1
