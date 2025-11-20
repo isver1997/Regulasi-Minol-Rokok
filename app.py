@@ -69,3 +69,41 @@ st.subheader("Aturan Eksklusif Minol (tanpa padanan di Tembakau)")
 st.dataframe(df_f[df_f["exclusive_flag"]==1][["domain","regulasi","level","intensity_score","year"]].sort_values(["domain","level"], ascending=[True, False]))
 
 st.markdown("> Insight untuk Rekomendasi Kebijakan (Prediktif): Minol lebih ketat di domain supply chain (Distribusi, Standar Mutu, Daring). Sedangkan produk tembakau dominan pada Label/Iklan. Maka melihat pada kondisi tersebut, sebagai dua produk yang dikenai cukai dengan tujuan mengurangi konsumsinya, perlu ada penyeimbangan regulasi agar mencapai keadilan secara tujuan dari diberlakukannya cukai, dengan cara membuat regulasi yang serupa yang diterapkan kepada dua produk yang dikenai cukai tersebut. Meskipun tentu secara yuridis-sosiologis, terdapat parameter yang menyebabkan latar belakangnya regulasi yang berbeda pada dua produk cukai itu, misalnya sebagian besar muslim di Indonesia yang mengharamkan konsumsi minol, dan produk tembakau yang mempengaruhi perekonomian nasional dari pendapatan cukai serta terhadap usaha dan buruh tembakau. Namun, tetap memerlukan kajian normatif yang komprehensif agar produk tembakau sebagai produk cukai yang perlu dikurangi konsumsinya untuk menurunkan tingkat prevalensi perokok di Indonesia dengan pertimbangan public health. Disinilah diperlukan rekomendasi kebijakan yang bersifat prediktif, agar pemerintah menerapkan regulasi yang sama ketatnya atas perlakuan peredaran dan konsumsi dua produk yang dikenai cukai tersebut.")
+
+# --- Step 6: Tren Regulasi per Tahun + Prediksi Sederhana ---
+st.subheader("Tren Regulasi per Tahun")
+
+# Hitung jumlah regulasi per tahun per sektor
+trend = df_f.groupby(["year","sector"])["regulasi"].count().reset_index()
+
+fig3, ax3 = plt.subplots(figsize=(8,5))
+sns.lineplot(data=trend, x="year", y="regulasi", hue="sector", marker="o", ax=ax3)
+ax3.set_title("Jumlah Regulasi per Tahun (Minol vs Tembakau)")
+ax3.set_xlabel("Tahun")
+ax3.set_ylabel("Jumlah Regulasi")
+st.pyplot(fig3)
+
+# --- Prediksi sederhana: extrapolasi linear ke depan ---
+st.subheader("Prediksi Tren Regulasi (Sederhana)")
+
+# Ambil rata-rata pertambahan regulasi per sektor
+growth = trend.groupby("sector")["regulasi"].diff().groupby(trend["sector"]).mean().fillna(0)
+
+future_years = [max(df_f["year"].dropna())+2, max(df_f["year"].dropna())+4]
+pred_data = []
+for sector in trend["sector"].unique():
+    last_val = trend[trend["sector"]==sector]["regulasi"].iloc[-1]
+    for i, fy in enumerate(future_years, start=1):
+        pred_data.append({"year": fy, "sector": sector, "regulasi": last_val + i*growth[sector]})
+
+pred_df = pd.DataFrame(pred_data)
+
+fig4, ax4 = plt.subplots(figsize=(8,5))
+sns.lineplot(data=trend, x="year", y="regulasi", hue="sector", marker="o", ax=ax4)
+sns.lineplot(data=pred_df, x="year", y="regulasi", hue="sector", marker="x", linestyle="--", ax=ax4)
+ax4.set_title("Prediksi Jumlah Regulasi ke Depan")
+ax4.set_xlabel("Tahun")
+ax4.set_ylabel("Jumlah Regulasi")
+st.pyplot(fig4)
+
+st.markdown("> Catatan: Prediksi ini bersifat ilustratif (linear sederhana). Tujuannya menunjukkan arah tren regulasi, bukan hasil forecasting yang presisi. Dari tren terlihat Minol cenderung bertambah aturan teknis, sementara Tembakau stagnan. Rekomendasi kebijakan: memperkuat regulasi distribusi dan promosi daring untuk Tembakau agar seimbang dengan Minol.")
